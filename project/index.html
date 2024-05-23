@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- https://fontawesome.com/start 아이콘 제공 사이트 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <button class="login" onclick="openLoginPopup('Guest')">Guest</button>
+            <button class="login" onclick="openLoginPopup('Manager')">Manager</button>
+        </div>
+    </header>
+
+    <div id="login-popup" class="popup" style="display:none;">
+        <div id="login-popup-content"></div>
+    </div>
+    <div class="header-content">
+        <div class="login-info" id="login-info" style="display: none;">
+            <p id="user-info">님 환영합니다.</p>
+        </div>
+    </div>
+    <br>
+    <div>
+        <img src="map.png" class="map" alt="Map Image">
+    </div>
+    <br><br><br>
+    <h1>경춘선 공릉숲길 카페 정보</h1>
+    <div class="container">
+        <button><i class="fas fa-home"></i>버튼1</button>
+        <button><i class="fas fa-info"></i>버튼2</button>
+        <button><i class="fas fa-envelope"></i>버튼3</button>
+        <button><i class="fas fa-user"></i>버튼4</button>
+        <input class="search" placeholder="검색">
+        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+    </div>
+    <br><br><br><br><br>
+    <div class="gallery">
+        <div class="image-container">
+            <img src="/image/cafe1.jpg" alt="Cafe 1" onclick="openPopup('Cafe 1')">
+            <div class="caption">Cafe 1</div>
+        </div>
+        <div class="image-container">
+            <img src="/image/cafe2.jpg" alt="Cafe 2" onclick="openPopup('Cafe 2')">
+            <div class="caption">Cafe 2</div>
+        </div>
+        <div class="image-container">
+            <img src="/image/cafe4.jpg" alt="Cafe 4" onclick="openPopup('Cafe 4')">
+            <div class="caption">Cafe 3</div>
+        </div>
+        <div class="image-container">
+            <img src="/image/cafe3.jpg" alt="Cafe 3" onclick="openPopup('Cafe 3')">
+            <div class="caption">Cafe 4</div>
+        </div>
+        <div class="image-container">
+            <img src="/image/cafe5.jpg" alt="Cafe 5" onclick="openPopup('Cafe 5')">
+            <div class="caption">Cafe 5</div>
+        </div>
+        <div class="image-container">
+            <img src="/image/돌체스파지오1.jpg" alt="Cafe 6" onclick="openPopup('Cafe 6')">
+            <div class="caption">Cafe 6</div>
+        </div>
+        <div class="image-container">
+            <img src="/image/따미커피1.jpg" alt="Cafe 7" onclick="openPopup('Cafe 7')">
+            <div class="caption">Cafe 7</div>
+        </div>
+        <div class="image-container">
+            <img src="/image/메종그리드1.jpg" alt="Cafe 8" onclick="openPopup('Cafe 8')">
+            <div class="caption">Cafe 8</div>
+        </div>
+        <div class="image-container">
+            <img src="/image/메트로폴리스1.jpg" alt="Cafe 9" onclick="openPopup('Cafe 9')">
+            <div class="caption">Cafe 9</div>
+        </div>
+    </div>
+    <div id="popup" class="popup" style="display:none;">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <p id="popup-text"></p>
+        </div>
+    </div>
+    <div id="login" class="login" style="display: none;">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <p id="popup-text"></p>
+        </div>
+    </div>
+    <script src="script.js">
+        
+    </script>
+</body>
+
+</html>
