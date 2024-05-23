@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- https://fontawesome.com/start 아이콘 제공 사이트 -->
+
+    <link rel="stylesheet" href="cafe.css">
+    <script src="cafe.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <button class="login">Guest</button>
+            <button class="login">Manager</button>
+        </div>
+    </header>
+    <br>
+    <div id="map-container" style="position: relative; display: inline-block;">
+        <img src="map.jpg" class="map" alt="Map Image">
+    </div>
+
+    <br><br><br>
+    <h1>경춘선 공릉숲길 카페 정보</h1>
+    <div class="container">
+        <button><i class="fas fa-home"></i>버튼1</button>
+        <button><i class="fas fa-info"></i>버튼2</button>
+        <button><i class="fas fa-envelope"></i>버튼3</button>
+        <button><i class="fas fa-user"></i>버튼4</button>
+        <input class="search" placeholder="검색">
+        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+    </div>
+    <br><br><br><br>
+    <div class="cafe-controls">
+        <button id="add-cafe-button"><i class="fas fa-plus"></i> Add Cafe</button>
+        <button id="delete-cafe-button"><i class="fas fa-trash"></i> Delete Cafe</button>
+    </div>
+    <br>
+    <div class="gallery" id="gallery">
+      <!-- 카페 이미지 동적 추가 -->
+    </div>
+
+    <div id="popup" class="popup" style="display:none;">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <p id="popup-text"></p>
+        </div>
+    </div>
+
+     <!-- 새로운 add-cafe-popup div -->
+     <div id="add-cafe-popup" class="popup" style="display:none;">
+        <div class="popup-content">
+            <span class="close" onclick="closeAddCafePopup()">&times;</span>
+            <form id="cafe-form" method="POST">
+                <label for="cafe-id">카페 위치:</label>
+                <select id="cafe-id" name="cafe-id" required>
+                    <option value="">카페를 선택하세요</option>
+                    <!-- cafe1~cafe28의 리스트 -->
+                    <option value="cafe1">Cafe 1</option>
+                    <option value="cafe2">Cafe 2</option>
+                    <option value="cafe3">Cafe 3</option>
+                    <option value="cafe4">Cafe 4</option>
+                    <option value="cafe5">Cafe 5</option>
+                    <option value="cafe6">Cafe 6</option>
+                    <option value="cafe7">Cafe 7</option>
+                    <option value="cafe8">Cafe 8</option>
+                    <option value="cafe9">Cafe 9</option>
+                    <option value="cafe10">Cafe 10</option>
+                    <option value="cafe11">Cafe 11</option>
+                    <option value="cafe12">Cafe 12</option>
+                    <option value="cafe13">Cafe 13</option>
+                    <option value="cafe14">Cafe 14</option>
+                    <option value="cafe15">Cafe 15</option>
+                    <option value="cafe16">Cafe 16</option>
+                    <option value="cafe17">Cafe 17</option>
+                    <option value="cafe18">Cafe 18</option>
+                    <option value="cafe19">Cafe 19</option>
+                    <option value="cafe20">Cafe 20</option>
+                    <option value="cafe21">Cafe 21</option>
+                    <option value="cafe22">Cafe 22</option>
+                    <option value="cafe23">Cafe 23</option>
+                    <option value="cafe24">Cafe 24</option>
+                    <option value="cafe25">Cafe 25</option>
+                    <option value="cafe26">Cafe 26</option>
+                    <option value="cafe27">Cafe 27</option>
+                    <option value="cafe28">Cafe 28</option>
+                </select>
+                <br>
+                <label for="cafe-name">카페명:</label>
+                <input type="text" id="cafe-name" name="cafe-name" required>
+                <br>
+                <label for="operating-hours">운영시간:</label>
+                <div id="operating-hours">
+                    <label for="monday">월:</label>
+                    <input type="text" id="monday" name="monday">
+                    <br>
+                    <label for="tuesday">화:</label>
+                    <input type="text" id="tuesday" name="tuesday">
+                    <br>
+                    <label for="wednesday">수:</label>
+                    <input type="text" id="wednesday" name="wednesday">
+                    <br>
+                    <label for="thursday">목:</label>
+                    <input type="text" id="thursday" name="thursday">
+                    <br>
+                    <label for="friday">금:</label>
+                    <input type="text" id="friday" name="friday">
+                    <br>
+                    <label for="saturday">토:</label>
+                    <input type="text" id="saturday" name="saturday">
+                    <br>
+                    <label for="sunday">일:</label>
+                    <input type="text" id="sunday" name="sunday">
+                </div>
+                <br>
+                <label for="menu">메뉴:</label>
+                <div id="menu">
+                    <label for="iceAmericano">아이스 아메리카노:</label>
+                    <input type="text" id="iceAmericano" name="iceAmericano">
+                    <br>
+                    <label for="coldBrew">콜드 브루:</label>
+                    <input type="text" id="coldBrew" name="coldBrew">
+                    <br>
+                    <label for="latte">라떼:</label>
+                    <input type="text" id="latte" name="latte">
+                    <br>
+                    <label for="additional1">추가메뉴 1:</label>
+                    <input type="text" id="additional1" name="additional1">
+                    <br>
+                    <label for="additional2">추가메뉴 2:</label>
+                    <input type="text" id="additional2" name="additional2">
+                    <br>
+                    <label for="dessert1">디저트 1:</label>
+                    <input type="text" id="dessert1" name="dessert1">
+                    <br>
+                    <label for="dessert2">디저트 2:</label>
+                    <input type="text" id="dessert2" name="dessert2">
+                </div>
+                <br>
+                <label for="outlets">콘센트 여부:</label>
+                <select id="outlets" name="outlets">
+                    <option value="많음">많음</option>
+                    <option value="적음">적음</option>
+                    <option value="X">X</option>
+                </select>
+                <br>
+                <label for="atmosphere">분위기:</label>
+                <div id="atmosphere">
+                    <label><input type="checkbox" name="atmosphere" value="공부하기 좋은"> 공부하기 좋은</label>
+                    <label><input type="checkbox" name="atmosphere" value="조용한"> 조용한</label>
+                    <label><input type="checkbox" name="atmosphere" value="아늑한"> 아늑한</label>
+                    <label><input type="checkbox" name="atmosphere" value="뷰가 좋은"> 뷰가 좋은</label>
+                    <label><input type="checkbox" name="atmosphere" value="모던한"> 모던한</label>
+                    <label><input type="checkbox" name="atmosphere" value="경춘선 숲길뷰"> 경춘선 숲길뷰</label>
+                </div>
+                <br>
+                <label for="cafe-image">사진 첨부:</label>
+                <input type="file" id="cafe-image" name="cafe-image" accept="image/*" required>
+                <br>
+                <button type="submit">저장</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
