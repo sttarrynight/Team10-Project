@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- https://fontawesome.com/start 아이콘 제공 사이트 -->
+
+    <link rel="stylesheet" href="cafe.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="cafe.js" defer></script>
+    <script src="auth.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <button id="openGuestLoginDialog">Guest Login</button>
+            <button id="openManagerLoginDialog">Manager Login</button>
+            <div id="welcomeMessage" class="welcome-message" style="display: none;"></div>
+            <button id="Logout" style="display: none;">Log Out</button>
+        </div>
+        
+       
+    </header>
+
+    <!-- Guest Login Dialog -->
+    <dialog id="guestLoginDialog">
+        <div class="popup-content">
+            <span class="close" onclick="closeGuestLoginDialog()">&times;</span>
+            <h2>게스트 로그인</h2>
+            <form id="guest-login-form" method="dialog">
+                <div>
+                    <label for="guest-username">아이디:</label>
+                    <input type="text" id="guest-username" name="guest-username" required>
+                </div>
+                <div>
+                    <label for="guest-password">비밀번호:</label>
+                    <input type="password" id="guest-password" name="guest-password" required>
+                </div>
+                <div class="buttons">
+                    <button type="submit" class="login-button">로그인</button>
+                    <button type="button" class="signup-button" onclick="opensignupSelectionDialog()">회원가입</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+    <dialog id="managerLoginDialog">
+        <div class="popup-content">
+            <span class="close" onclick="closeManagerLoginDialog()">&times;</span>
+            <h2>매니저 로그인</h2>
+            <form id="manager-login-form" method="dialog">
+                <div>
+                    <label for="manager-username">아이디:</label>
+                    <input type="text" id="manager-username" name="manager-username" required>
+                </div>
+                <div>
+                    <label for="manager-password">비밀번호:</label>
+                    <input type="password" id="manager-password" name="manager-password" required>
+                </div>
+                <div class="buttons">
+                    <button type="submit" class="login-button">로그인</button>
+                    <button type="button" class="signup-button" onclick="opensignupSelectionDialog()">회원가입</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+  
+    <!-- Signup Selection Dialog -->
+    <dialog id="signupSelectionDialog">
+        <div class="popup-content">
+            <span class="close" onclick="closeSignupSelectionDialog()">&times;</span>
+            <h2>회원가입</h2>
+            <div class="buttons">
+                <button type="button" onclick="openGuestSignupDialog()">게스트 회원가입</button>
+                <button type="button" onclick="openManagerSignupDialog()">매니저 회원가입</button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Guest Signup Dialog -->
+    <dialog id="guestSignupDialog">
+        <div class="popup-content">
+            <span class="close" onclick="closeGuestSignupDialog()">&times;</span>
+            <h2>게스트 회원가입</h2>
+            <form id="guest-signup-form">
+                <div>
+                    <label for="guest-signup-username">아이디:</label>
+                    <input type="text" id="guest-signup-username" name="guest-signup-username" required>
+                </div>
+                <div>
+                    <label for="guest-signup-password">비밀번호:</label>
+                    <input type="password" id="guest-signup-password" name="guest-signup-password" required>
+                </div>
+                <div>
+                    <label for="guest-signup-email">이메일:</label>
+                    <input type="text" id="guest-signup-email-prefix" name="guest-signup-email-prefix" required>
+                    @
+                    <select id="guest-signup-email-domain">
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="daum.net">daum.net</option>
+                        <option value="kakao.com">kakao.com</option>
+                        <option value="custom">직접 입력</option>
+                    </select>
+                    <input type="text" id="guest-signup-email-custom" name="guest-signup-email-custom" style="display: none;">
+                </div>
+                <div class="buttons">
+                    <button type="submit" class="signup-button">회원가입</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- Manager Signup Dialog -->
+    <dialog id="managerSignupDialog">
+        <div class="popup-content">
+            <span class="close" onclick="closeManagerSignupDialog()">&times;</span>
+            <h2>매니저 회원가입</h2>
+            <form id="manager-signup-form">
+                <div>
+                    <label for="manager-signup-username">아이디:</label>
+                    <input type="text" id="manager-signup-username" name="manager-signup-username" required>
+                </div>
+                <div>
+                    <label for="manager-signup-password">비밀번호:</label>
+                    <input type="password" id="manager-signup-password" name="manager-signup-password" required>
+                </div>
+                <div>
+                    <label for="manager-signup-email">이메일:</label>
+                    <input type="text" id="manager-signup-email-prefix" name="manager-signup-email-prefix" required>
+                    @
+                    <select id="manager-signup-email-domain">
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="daum.net">daum.net</option>
+                        <option value="kakao.com">kakao.com</option>
+                        <option value="custom">직접 입력</option>
+                    </select>
+                    <input type="text" id="manager-signup-email-custom" name="manager-signup-email-custom" style="display: none;">
+                </div>
+                <div>
+                    <label for="manager-signup-phone">휴대폰 번호:</label>
+                    <input type="text" id="manager-signup-phone" name="manager-signup-phone" required>
+                </div>
+                <div class="buttons">
+                    <button type="submit" class="signup-button">회원가입</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+    <br>
+    <div class="main-content">
+        <div id="map-container" style="position: relative; display: inlin-block;">
+            <img src="map.png" class="map" alt="Map Image">
+        </div>
+        <div class="sidebar">
+            <h3>카테고리 선택</h3>
+            <div class="filter-group">
+                <h4>아메리카노</h4>
+                <select id="price-range">
+                    <option value="all">전체</option>
+                    <option value="low">3000원 이하</option>
+                    <option value="mid">3000~4500원</option>
+                    <option value="high">4500원 이상</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <h4>카페라떼</h4>
+                <select id="latte-price">
+                    <option value="all">전체</option>
+                    <option value="low">4000원 이하</option>
+                    <option value="mid">4000~5500원</option>
+                    <option value="high">5500원 이상</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <h4>분위기</h4>
+                <select id="ambiance">
+                    <option value="all">전체</option>
+                    <option value="dark">어두운</option>
+                    <option value="sensitive">감성있는</option>
+                    <option value="dessert">디저트 위주의</option>
+                    <option value="franchise">프랜차이즈</option>
+                    <option value="forest">경춘선숲길뷰</option>
+                </select>
+            </div>
+            <button id="filter-search-button">검색</button>
+            <button id="reset">초기화</button>
+        </div>
+    </div>
+    <br><br><br>
+    <h1>경춘선 공릉숲길 카페 정보</h1>
+    <div class="container">
+        <button id="open-cafes-button" class="icon-button"><i class="fas fa-clock"></i></button>
+        <button id="few-outlets-button" class="icon-button"><i class="fas fa-plug"></i></button>
+        <button id="many-outlets-button" class="icon-button"><i class="fas fa-plug"></i><i class="fas fa-plug"></i></button>
+        <button id="study-friendly-button" class="icon-button"><i class="fas fa-book"></i></button>
+        
+        <div class="search-container" style="position: relative;">
+            <input class="search" placeholder="검색">
+            <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+            <div class="search-results"></div>
+        </div>       
+    </div>
+    <br><br><br><br>
+    <div class="cafe-controls">
+        <button id="add-cafe-button"><i class="fas fa-plus"></i> Add Cafe</button>
+        <button id="delete-cafe-button"><i class="fas fa-trash"></i> Delete Cafe</button>
+    </div>
+    <br>
+    <div class="gallery" id="gallery">
+    <!-- 카페 이미지 동적 추가 -->
+    </div>
+    </div>
+    <div id="popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <div id="popup-text"></div>
+        </div>
+    </div>
+
+    <!-- add-cafe-popup 팝업창 -->
+    <div id="add-cafe-popup" class="popup" style="display:none;">
+        <div class="popup-content">
+            <span class="close" onclick="closeAddCafePopup()">&times;</span>
+            <form id="add-cafe-form" method="POST">
+                <label for="add-cafe-list">카페 위치:</label>
+                <select id="add-cafe-list" name="add-cafe-list" required>
+                    <option value="">카페를 선택하세요</option>
+                    <!-- cafe1~cafe28의 리스트 동적 추가-->
+                </select>
+                <br>
+                <label for="cafe-name">카페명:</label>
+                <input type="text" id="cafe-name" name="cafe-name" required>
+                <br>
+                <div id="operatingHours">
+                    <p>운영시간: </p>
+                    <label for="monday">월:</label>
+                    <input type="text" id="monday" name="monday">
+                    <br>
+                    <label for="tuesday">화:</label>
+                    <input type="text" id="tuesday" name="tuesday">
+                    <br>
+                    <label for="wednesday">수:</label>
+                    <input type="text" id="wednesday" name="wednesday">
+                    <br>
+                    <label for="thursday">목:</label>
+                    <input type="text" id="thursday" name="thursday">
+                    <br>
+                    <label for="friday">금:</label>
+                    <input type="text" id="friday" name="friday">
+                    <br>
+                    <label for="saturday">토:</label>
+                    <input type="text" id="saturday" name="saturday">
+                    <br>
+                    <label for="sunday">일:</label>
+                    <input type="text" id="sunday" name="sunday">
+                </div>
+                <br>
+                <div id="menu">
+                    <p>메뉴: </p>
+                    <label for="Americano">아메리카노:</label>
+                    <input type="text" id="Americano" name="Americano">
+                    <br>
+                    <label for="cafelatte">카페라떼:</label>
+                    <input type="text" id="cafelatte" name="cafelatte">
+                    <br>
+                    <label for="additional1">추가메뉴 1:</label>
+                    <input type="text" id="additional1" name="additional1">
+                    <br>
+                    <label for="additional2">추가메뉴 2:</label>
+                    <input type="text" id="additional2" name="additional2">
+                    <br>
+                    <label for="dessert1">디저트 1:</label>
+                    <input type="text" id="dessert1" name="dessert1">
+                    <br>
+                    <label for="dessert2">디저트 2:</label>
+                    <input type="text" id="dessert2" name="dessert2">
+                </div>
+                <br>
+                <label for="outlets">콘센트:</label>
+                <select id="outlets" name="outlets">
+                    <option value="많음">많음</option>
+                    <option value="적음">적음</option>
+                    <option value="X">X</option>
+                </select>
+                <br>
+                <div id="atmosphere">
+                    <p>분위기: </p>
+                    <label><input type="checkbox" name="atmosphere" value="공부하기좋은"> 공부하기 좋은</label>
+                    <label><input type="checkbox" name="atmosphere" value="어두운"> 어두운</label>
+                    <label><input type="checkbox" name="atmosphere" value="감성있는"> 감성있는</label>
+                    <label><input type="checkbox" name="atmosphere" value="디저트 위주의"> 디저트 위주의</label>
+                    <label><input type="checkbox" name="atmosphere" value="프랜차이즈"> 프랜차이즈</label>
+                    <label><input type="checkbox" name="atmosphere" value="경춘선숲길뷰"> 경춘선 숲길뷰</label>
+                </div>
+                <br>
+                <label for="cafe-image">사진 첨부:</label>
+                <input type="file" id="cafe-image" name="cafe-image" required>
+                <br>
+                <button id="cafe-add" type="submit">저장</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- delete-cafe-popup -->
+    <div id="delete-cafe-popup" class="popup" style="display:none;">
+        <div class="popup-content">
+            <span class="close" onclick="closeDeleteCafePopup()">&times;</span>
+            <form id="delete-cafe-form" method="POST">
+                <label for="delete-cafe-list">카페 위치:</label>
+                <select id="delete-cafe-list" name="delete-cafe-list" required>
+                    <option value="">카페를 선택하세요</option>
+                    <!-- cafe1~cafe28의 리스트 동적 추가-->
+                </select>
+                <br><br>
+                <button id="cafe-delete" type="submit">삭제</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
